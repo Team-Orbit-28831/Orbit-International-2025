@@ -30,7 +30,7 @@ public class CascadeSlides {
 
     public void init(HardwareMap hardwareMap) {
 
-//        pidf = new PIDFCoefficients(p, i, d, f);
+//      pidf = new PIDFCoefficients(p, i, d, f);
 
         slideMotor = hardwareMap.get(DcMotorEx.class, "cascadeDrive"); // Ensure this matches your config
         slideMotor.setDirection(DcMotorEx.Direction.REVERSE);
@@ -38,7 +38,7 @@ public class CascadeSlides {
         slideMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         slideMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         slideMotor.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-//        slideMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);//comment this out
+//        slideMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);        //comment this out
     }
 
     public double P(Telemetry telemetry, double reference){
@@ -150,7 +150,6 @@ public class CascadeSlides {
     }
 
     public void moveToPosition(int reference, double power) {
-
         slideMotor.setTargetPosition(reference);
         slideMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         slideMotor.setPower(power);
@@ -161,9 +160,17 @@ public class CascadeSlides {
         slideMotor.setPower(power);
     }
 
+    public void moveSlides(boolean extension, boolean retraction) {
+        if (extension) {
+            slideMotor.setPower(1);
+        }
+        else if (retraction) {
+            slideMotor.setPower(-1);
+        }
+    }
+
     public void stop() {
         slideMotor.setPower(STOP_POWER);
-
     }
 
     public int getCurrentPosition() {

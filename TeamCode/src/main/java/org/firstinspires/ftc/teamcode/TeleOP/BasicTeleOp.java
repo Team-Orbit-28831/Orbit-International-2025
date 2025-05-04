@@ -53,7 +53,7 @@ public class BasicTeleOp extends LinearOpMode {
             } else if (gamepad2.x) {
                 cascadeSlides.moveToPosition(POSITION0, 1);
             } else if (gamepad2.left_stick_y > 0.15 || gamepad2.left_stick_y < 0.15) {
-                // Manual control using the left stick
+                 // Manual control using the left stick
                 double liftPower = -gamepad2.left_stick_y; // Invert if necessary
                 cascadeSlides.move(liftPower);
             } else {
@@ -67,11 +67,11 @@ public class BasicTeleOp extends LinearOpMode {
             } else if (gamepad2.dpad_down) {
                 slidePivot.moveToPosition(position0, 0.95);
             }
-//            else if (gamepad2.left_stick_x > 0.15 || gamepad2.left_stick_x < 0.15) {
-//                // Manual control using the left stick
-//                double liftPower = -gamepad2.left_stick_x; // Invert if necessary
-//                slidePivot.move(liftPower);
-//        }
+            else if (gamepad2.left_stick_x > 0.15 || gamepad2.left_stick_x < 0.15) {
+                // Manual control using the left stick
+                double liftPower = -gamepad2.left_stick_x; // Invert if necessary
+                slidePivot.move(liftPower);
+        }
 
             else {
                 slidePivot.stop();
@@ -84,10 +84,10 @@ public class BasicTeleOp extends LinearOpMode {
             claw.controlArm(gamepad2.left_bumper, gamepad2.right_bumper);
 
             // Control the slides with Y for extend, A for retract
-//            cascadeSlides.moveSlides(gamepad1.y, gamepad1.a);
+            cascadeSlides.moveSlides(gamepad1.y, gamepad1.a);
 
             // Control the pivot with Left and Right bumpers
-//            slidePivot.movePivot(gamepad1.left_bumper, gamepad1.right_bumper);
+            slidePivot.movePivot(gamepad1.left_bumper, gamepad1.right_bumper);
 
 //            telemetry.addData("Pivot Power", slidePivot.getMotorPower()); // Show the motor power
             telemetry.addData("Current Position", cascadeSlides.getCurrentPosition());
@@ -96,8 +96,5 @@ public class BasicTeleOp extends LinearOpMode {
 
             telemetry.update();
         }
-    }
-
-    public static class Autonomus {
     }
 }

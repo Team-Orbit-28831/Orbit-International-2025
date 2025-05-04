@@ -44,9 +44,8 @@ public class CascadePivot {
         pivotMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         pivotMotor.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
 //      pivotMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-
-
     }
+
     public double P(Telemetry telemetry, double reference){
         double position = pivotMotor.getCurrentPosition();
 
@@ -61,6 +60,7 @@ public class CascadePivot {
 
         return out;
     }
+
     public double PI(Telemetry telemetry, double reference, ElapsedTime time){
         double position = pivotMotor.getCurrentPosition();
 
@@ -81,6 +81,7 @@ public class CascadePivot {
 
         return out;
     }
+
     public double PID(Telemetry telemetry, double reference, ElapsedTime time){
         double position = pivotMotor.getCurrentPosition();
 
@@ -154,7 +155,6 @@ public class CascadePivot {
     }
 
     public void moveToPosition(int reference, double power) {
-
         pivotMotor.setTargetPosition(reference);
 
         pivotMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
@@ -166,9 +166,17 @@ public class CascadePivot {
         pivotMotor.setPower(power);
     }
 
+    public void movePivot(boolean up, boolean down) {
+        if (up) {
+            pivotMotor.setPower(1);
+        }
+        else if (down) {
+            pivotMotor.setPower(-1);
+        }
+    }
+
     public void stop() {
         pivotMotor.setPower(STOP_POWER);
-
     }
 
     public int getCurrentPosition() {
