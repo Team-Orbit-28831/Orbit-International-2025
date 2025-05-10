@@ -22,7 +22,7 @@ public class Claw {
     public void init(HardwareMap hardwareMap) {
         //clawServo = hardwareMap.get(Servo.class, "clawDrive");
         armServo = hardwareMap.get(Servo.class, "armServo");
-        //rotationServo = hardwareMap.get(Servo.class, "rotationServo");
+        // rotationServo = hardwareMap.get(Servo.class, "rotationServo");
     }
 
     // Control claw opening and closing using sensitivity
