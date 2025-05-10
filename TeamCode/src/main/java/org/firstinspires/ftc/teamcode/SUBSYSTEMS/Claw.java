@@ -16,12 +16,13 @@ public class Claw {
     private final double Ki = 0.01; // Integral gain
     private final double Kd = 0.05; // Derivative gain
     private final ElapsedTime timer = new ElapsedTime();
+    private float testcurrentpos = 0;
 
     // Initialize claw and arm servos
     public void init(HardwareMap hardwareMap) {
-        clawServo = hardwareMap.get(Servo.class, "clawDrive");
+        //clawServo = hardwareMap.get(Servo.class, "clawDrive");
         armServo = hardwareMap.get(Servo.class, "armServo");
-        rotationServo = hardwareMap.get(Servo.class, "rotationServo");
+        //rotationServo = hardwareMap.get(Servo.class, "rotationServo");
     }
 
     // Control claw opening and closing using sensitivity
@@ -52,7 +53,8 @@ public class Claw {
         } else if (down) {
             armServo.setPosition(0.2); // Move backward
         } else {
-            armServo.setPosition(0.5); // Move to neutral position
+            armServo.setPosition(0.5);
+
         }
     }
 
@@ -75,5 +77,20 @@ public class Claw {
             e.printStackTrace();
             return 0;
         }
+    }
+    public void testServo(float y, boolean posbutton,boolean goback){
+        if (y > 0.1) {
+            armServo.setPosition(armServo.getPosition()+1);
+        }
+        if (y <-0.1) {
+            armServo.setPosition(armServo.getPosition()-1);
+        }
+        if (posbutton == true){
+           testcurrentpos= (float) armServo.getPosition();
+        }
+        if (goback == true){
+            armServo.setPosition(testcurrentpos);
+        }
+
     }
 }
