@@ -29,7 +29,16 @@ public class Claw {
         if (open > 0.1) {
             clawServo.setPosition(0.83);  // Open the claw
         }
-        else if (close>0.1) {
+        else if (close > 0.1) {
+            clawServo.setPosition(1.0);   // Close the claw
+        }
+    }
+
+    public void useClaw(boolean open, boolean close) {
+        if (open) {
+            clawServo.setPosition(0.83);  // Open the claw
+        }
+        else if (close) {
             clawServo.setPosition(1.0);   // Close the claw
         }
     }
