@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.TeleOP;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.SUBSYSTEMS.CascadePivot;
-import org.firstinspires.ftc.teamcode.SUBSYSTEMS.Claw;
+import org.firstinspires.ftc.teamcode.SUBSYSTEMS.Claw_OLD;
 import org.firstinspires.ftc.teamcode.SUBSYSTEMS.Drivetrain;
 import org.firstinspires.ftc.teamcode.SUBSYSTEMS.CascadeSlides;
 
@@ -12,7 +12,7 @@ public class BasicTeleOp extends LinearOpMode {
     private Drivetrain drivetrain;
     private CascadeSlides cascadeSlides;
     private CascadePivot slidePivot;
-    private Claw claw;
+    private Claw_OLD claw;
 
     private static final int POSITION0 = 0;
     private static final int POSITION1 = 1865; // Adjusted for safer movement
@@ -26,7 +26,7 @@ public class BasicTeleOp extends LinearOpMode {
         drivetrain = new Drivetrain();
         cascadeSlides = new CascadeSlides();
         slidePivot = new CascadePivot();
-        claw = new Claw();
+        claw = new Claw_OLD();
 
         drivetrain.init(hardwareMap);
         cascadeSlides.init(hardwareMap);
