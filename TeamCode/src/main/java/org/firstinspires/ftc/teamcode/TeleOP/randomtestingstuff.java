@@ -24,7 +24,7 @@ public class randomtestingstuff extends LinearOpMode {
         claw.init(hardwareMap);
         waitForStart();
         while (opModeIsActive()){
-                claw.testServo(gamepad1.left_stick_x,gamepad1.a,gamepad1.b);
+                //claw.testServo(gamepad1.left_stick_x,gamepad1.a,gamepad1.b);
 
         }
     }

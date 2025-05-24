@@ -3,8 +3,14 @@ package org.firstinspires.ftc.teamcode.SUBSYSTEMS;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.hardware.limelightvision.LLResult;
+
 import com.qualcomm.hardware.limelightvision.Limelight3A;
+import com.qualcomm.hardware.limelightvision.LLResult;
+import com.qualcomm.hardware.limelightvision.LLResultTypes;
+import com.qualcomm.hardware.limelightvision.LLStatus;
+
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 
 public class Claw {
     private Servo clawServo = null;
@@ -33,6 +39,7 @@ public class Claw {
         limelight = hardwareMap.get(Limelight3A.class, "limelight");
         limelight.setPollRateHz(100); // Query Limelight 100 times per second
         limelight.start(); // Start Limelight
+        limelight.pipelineSwitch(0);
     }
 
     // Control claw open/close
@@ -90,33 +97,41 @@ public class Claw {
     }
 
     // Auto-align claw rotation based on Limelight target yaw (tx)
-    public void autoAlignClaw() {
+    public void autoAlignClaw(Telemetry telemetry) {
         LLResult result = limelight.getLatestResult();
-
-        // Check if there is a valid target
         if (result != null && result.isValid()) {
+            double tx = result.getTx(); // How far left or right the target is (degrees)
+            double ty = result.getTy(); // How far up or down the target is (degrees)
+            double ta = result.getTa(); // How big the target looks (0%-100% of the image)
+
+            telemetry.addData("Target X", tx);
+            telemetry.addData("Target Y", ty);
+            telemetry.addData("Target Area", ta);
+            telemetry.update();
+
+            double txMin = -30.0; // Adjust based on your setup
+            double txMax = 30.0;
+            double servoMin = 0.0;
+            double servoMax = 1.0;
 
 
-            // Get the horizontal offset (tx) in degrees
-            double tx = result.getTx();
 
-            // Align the claw if the target is sufficiently off-center
-            if (Math.abs(tx) > 1.0) {
-                double kP = 0.003; // Proportional gain
-                double delta = -tx * kP;
+            // Clamp tx to the defined range
+            tx = Math.max(txMin, Math.min(txMax, tx));
 
-                // Get the current position of the rotation servo
-                double currentPos = rotationServo.getPosition();
+            // Linear interpolation
+            // Invert tx for opposite servo movement:
+            double servoPosition = ((tx - txMin) * (servoMax - servoMin) / (txMax - txMin)) + servoMin;
 
-                // Calculate the new position
-                double newPos = currentPos + delta;
 
-                // Clamp the new position between 0.0 and 1.0
-                newPos = Math.max(0.0, Math.min(1.0, newPos));
 
-                // Set the new position to the rotation servo
-                rotationServo.setPosition(newPos);
-            }
+            rotationServo.setPosition(servoPosition);
+
+            telemetry.addData("Servo Position", servoPosition);
+            telemetry.update();
+        } else {
+            telemetry.addData("Limelight", "No Targets");
+            telemetry.update();
         }
     }
 

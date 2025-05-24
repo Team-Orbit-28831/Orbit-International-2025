@@ -46,16 +46,18 @@ public class DriveTrain_and_Claw extends LinearOpMode {
             claw.controlClaw(gamepad1.a, gamepad1.y);
             claw.turnClaw(gamepad1.left_trigger, gamepad1.right_trigger);
             claw.angleClaw(gamepad1.b, gamepad1.x);
+            claw.autoAlignClaw(telemetry);
+            telemetry.update();
             if(gamepad1.left_bumper = true){
                 //we will do the auto align button nsuff here
 
             }
 
-            telemetry.addData("Left Stick Y", gamepad1.left_stick_y);
-            telemetry.addData("Left Stick X", gamepad1.left_stick_x);
-
-            telemetry.addData("Left Encoder Ticks", leftEncoder.getCurrentPosition());
-            telemetry.addData("Right Encoder Ticks", rightEncoder.getCurrentPosition());
+//            telemetry.addData("Left Stick Y", gamepad1.left_stick_y);
+//            telemetry.addData("Left Stick X", gamepad1.left_stick_x);
+//
+//            telemetry.addData("Left Encoder Ticks", leftEncoder.getCurrentPosition());
+//            telemetry.addData("Right Encoder Ticks", rightEncoder.getCurrentPosition());
 
             telemetry.update();
         }
