@@ -5,12 +5,12 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.SUBSYSTEMS.CascadePivot;
 import org.firstinspires.ftc.teamcode.SUBSYSTEMS.Claw_OLD;
 import org.firstinspires.ftc.teamcode.SUBSYSTEMS.Drivetrain;
-import org.firstinspires.ftc.teamcode.SUBSYSTEMS.CascadeSlides;
+import org.firstinspires.ftc.teamcode.SUBSYSTEMS.CascadeSlides_OLD;
 
 @TeleOp(name = "Orbit TeleOp", group = "Linear OpMode")
 public class BasicTeleOp extends LinearOpMode {
     private Drivetrain drivetrain;
-    private CascadeSlides cascadeSlides;
+    private CascadeSlides_OLD cascadeSlides;
     private CascadePivot slidePivot;
     private Claw_OLD claw;
 
@@ -24,7 +24,7 @@ public class BasicTeleOp extends LinearOpMode {
     @Override
     public void runOpMode() {
         drivetrain = new Drivetrain();
-        cascadeSlides = new CascadeSlides();
+        cascadeSlides = new CascadeSlides_OLD();
         slidePivot = new CascadePivot();
         claw = new Claw_OLD();
 

@@ -1,14 +1,12 @@
 package org.firstinspires.ftc.teamcode.SUBSYSTEMS;
 
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-public class CascadeSlides {
+public class CascadeSlides_OLD {
     private DcMotorEx slideMotor;
 
 //    private PIDFCoefficients pidf;
@@ -160,12 +158,12 @@ public class CascadeSlides {
         slideMotor.setPower(power);
     }
 
-    public void moveSlides(boolean extension, boolean retraction, double power) {
+    public void moveSlides(boolean extension, boolean retraction) {
         if (extension) {
-            slideMotor.setPower(power);
+            slideMotor.setPower(1);
         }
         else if (retraction) {
-            slideMotor.setPower(-power);
+            slideMotor.setPower(-1);
         }
     }
 
