@@ -22,7 +22,7 @@ public class MeepMeepTesting {
         myBot.runAction(myBot.getDrive().actionBuilder(beginPose)
                 .strafeTo(new Vector2d(24,-52)).build());
 
-        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(20, -62, 0))
+        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(20, -63, 0))
                 .strafeTo(new Vector2d(20, -52))
                 .strafeTo(new Vector2d(35, -52))
                 .turn(Math.toRadians(90))
@@ -32,7 +32,7 @@ public class MeepMeepTesting {
                 .strafeTo(new Vector2d(48, -12))
                 .strafeTo(new Vector2d(62, -12))
                 .strafeTo(new Vector2d(62, -60))
-                .strafeTo(new Vector2d(20, -62))
+                .strafeTo(new Vector2d(20, -60))
                 .build());
 
         meepMeep.setBackground(MeepMeep.Background.FIELD_INTO_THE_DEEP_OFFICIAL)
