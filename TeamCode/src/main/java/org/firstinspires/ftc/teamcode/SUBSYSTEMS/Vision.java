@@ -8,8 +8,7 @@ import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.arcrobotics.ftclib.util.MathUtils;
-
+import edu.wpi.first.math.MathUtil;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -21,10 +20,10 @@ public class Vision extends SubsystemBase {
 
     //private final Servo led;
 
-    //public static double ledPWM = 0.5;
+    public static double ledPWM = 0.5;
 
     @Getter private boolean isDataOld = false;
-    @Getter @Setter private SampleColor detectionColor = SampleColor.BLUE;
+    @Getter @Setter private SampleColor detectionColor = SampleColor.RED;
     @Getter private LLResult result;
 
     public static double CAMERA_HEIGHT = 307.0 - 16;
@@ -53,25 +52,13 @@ public class Vision extends SubsystemBase {
         camera.start();
     }
 
+    @RequiredArgsConstructor
     public enum SampleColor {
         RED(0.0),
         BLUE(1.0),
         YELLOW(2.0);
 
-        @Getter private final double colorVal;
-
-        SampleColor(double colorVal) {
-            this.colorVal = colorVal;
-        }
-
-        public static SampleColor fromColorVal(double val) {
-            for (SampleColor color : values()) {
-                if (color.colorVal == val) {
-                    return color;
-                }
-            }
-            throw new IllegalArgumentException("No SampleColor with value " + val);
-        }
+        private final double colorVal;
     }
 
     public double getTx(double defaultValue) {
@@ -92,12 +79,12 @@ public class Vision extends SubsystemBase {
         if (result == null) {
             return false;
         }
-        return Math.abs(result.getTa()) >= 0.0001;
+        return !MathUtil.isNear(0, result.getTa(), 0.0001);
     }
 
     public double getDistance() {
         double ty = getTy(0.0);
-        if (Math.abs(ty) < 0.01) {
+        if (MathUtil.isNear(0, ty, 0.01)) {
             return 0;
         }
         double angleToGoalDegrees = CAMERA_ANGLE + ty;
@@ -116,19 +103,16 @@ public class Vision extends SubsystemBase {
     }
 
     public Double getTurnServoDegree() {
-        if (result == null) return null;
-
-        double[] output = result.getPythonOutput();
-        if (output == null || output.length < 4) return null;
-
-        return output[3]; // This is the angle
+        if (result == null) {
+            return null;
+        }
+        return result.getPythonOutput()[3];
     }
-
 
     @Override
     public void periodic() {
         camera.updatePythonInputs(
-                new double[] {detectionColor.getColorVal(), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0});
+                new double[] {detectionColor.colorVal, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0});
         result = camera.getLatestResult();
 
         if (result != null) {
@@ -139,7 +123,10 @@ public class Vision extends SubsystemBase {
             telemetry.addData("Distance", getDistance());
             telemetry.addData("Turn Servo Degrees", getTurnServoDegree());
 
-            // telemetry.update(); // Uncomment if you want telemetry updated every cycle
+            //      telemetry.addData("Tx", result.getTx());
+            //      telemetry.addData("Ty", result.getTy());
+            //      telemetry.addData("Ta", result.getTa());
+            // telemetry.update();
         }
     }
 }
