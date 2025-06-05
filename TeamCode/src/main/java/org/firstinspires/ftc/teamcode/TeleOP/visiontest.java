@@ -25,10 +25,7 @@ public class visiontest extends LinearOpMode {
             // Manually update vision system
             vision.periodic();
 
-            telemetry.addData("Target Visible", vision.isTargetVisible());
-            telemetry.addData("Distance (mm)", vision.getDistance());
-            telemetry.addData("Strafe Offset", vision.getStrafeOffset());
-            telemetry.addData("Turn Servo Degrees", vision.getTurnServoDegree());
+
             telemetry.update();
         }
     }
