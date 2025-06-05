@@ -1,23 +1,25 @@
-package org.firstinspires.ftc.teamcode.SUBSYSTEMS;
+package org.firstinspires.ftc.teamcode.SUBSYSTEMS;;
 
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-public class TestingCodeforanythingreally {
-    private DcMotor slides = null;
 
-    public void init(HardwareMap hardwareMap){
-        slides= hardwareMap.get(DcMotor.class, "slidesmotor");
-    }
-    public void slidesmotor(boolean up,boolean down) {
-        if (up == true) {
-            slides.setPower(0.2);
-        }
-        if (down == true){
-            slides.setPower(-0.2);
-        }
-        else{
-            slides.setPower(0);
-        }
+import org.firstinspires.ftc.teamcode.SUBSYSTEMS.CascadeSlides;
 
+@TeleOp(name = "MotorTest", group = "Linear OpMode")
+public class TestingCodeforanythingreally extends LinearOpMode {
+    private CascadeSlides motor;
+
+    @Override
+    public void runOpMode() {
+        motor = new CascadeSlides();
+        motor.init(hardwareMap);
+
+        waitForStart();
+
+        while(opModeIsActive()) {
+            motor.moveSlides(gamepad1.left_bumper, gamepad1.right_bumper, 0.2);
+        }
     }
 }

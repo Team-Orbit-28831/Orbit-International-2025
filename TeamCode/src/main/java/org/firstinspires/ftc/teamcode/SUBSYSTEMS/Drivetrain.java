@@ -21,10 +21,10 @@ public class Drivetrain {
     private final ElapsedTime timer = new ElapsedTime();
 
     public void init(HardwareMap hardwareMap) {
-        frontRightDrive = hardwareMap.get(DcMotor.class, "front_right_drive"); // CONTROL: port 0
-        backRightDrive = hardwareMap.get(DcMotor.class, "back_right_drive"); // CONTROL: port 1
-        backLeftDrive = hardwareMap.get(DcMotor.class, "back_left_drive"); // CONTROL: port 2
-        frontLeftDrive = hardwareMap.get(DcMotor.class, "front_left_drive"); // CONTROL: port 3
+        frontRightDrive = hardwareMap.get(DcMotor.class, "front_right_drive");   // CONTROL: port 0
+        backRightDrive = hardwareMap.get(DcMotor.class, "back_right_drive");     // CONTROL: port 1
+        backLeftDrive = hardwareMap.get(DcMotor.class, "back_left_drive");       // CONTROL: port 2
+        frontLeftDrive = hardwareMap.get(DcMotor.class, "front_left_drive");     // CONTROL: port 3
 
         // Set motor directions (adjust if needed)
         frontLeftDrive.setDirection(DcMotor.Direction.REVERSE);

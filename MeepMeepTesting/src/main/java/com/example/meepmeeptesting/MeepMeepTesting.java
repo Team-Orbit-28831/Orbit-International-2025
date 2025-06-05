@@ -30,8 +30,8 @@ public class MeepMeepTesting {
                 .strafeTo(new Vector2d(48, -12))
                 .strafeTo(new Vector2d(48, -60))
                 .strafeTo(new Vector2d(48, -12))
-                .strafeTo(new Vector2d(62, -12))
-                .strafeTo(new Vector2d(62, -60))
+                .strafeTo(new Vector2d(56, -12))
+                .strafeTo(new Vector2d(56, -60))
                 .strafeTo(new Vector2d(20, -60))
                 .build());
 
